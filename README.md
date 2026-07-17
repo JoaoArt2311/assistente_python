@@ -1,4 +1,4 @@
-# Assistente de Suporte TI
+# Assistente de Suporte TI - Versão 1.0.1
 
 Automação em Python para o trabalho diário de suporte em computadores Windows.
 
