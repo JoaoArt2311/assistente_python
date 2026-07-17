@@ -16,6 +16,7 @@ from tkinter import filedialog, messagebox, ttk
 APP_NAME = "Assistente de Suporte TI"
 APP_VERSION = "1.0.1"
 CREATE_NO_WINDOW = getattr(subprocess, "CREATE_NO_WINDOW", 0)
+HEADER_COLOR = "#3FA642"
 
 
 class SupportToolError(RuntimeError):
@@ -419,16 +420,16 @@ class AssistenteTI(tk.Tk):
         style.configure("Card.TFrame", background="#FFFFFF", relief="flat")
         style.configure("TLabel", background="#F4F6FB", foreground="#182033", font=("Segoe UI", 10))
         style.configure("Card.TLabel", background="#FFFFFF", foreground="#182033", font=("Segoe UI", 10))
-        style.configure("Title.TLabel", background="#25106B", foreground="#FFFFFF", font=("Segoe UI Semibold", 20))
-        style.configure("Subtitle.TLabel", background="#25106B", foreground="#D8D2FA", font=("Segoe UI", 10))
-        style.configure("Admin.TLabel", background="#25106B", foreground="#77E6B6", font=("Segoe UI Semibold", 9))
-        style.configure("TButton", font=("Segoe UI Semibold", 9), padding=(12, 8))
-        style.configure("Primary.TButton", background="#3615FA", foreground="#FFFFFF")
+        style.configure("Title.TLabel", background=HEADER_COLOR, foreground="#FFFFFF", font=("Segoe UI Semibold", 20))
+        style.configure("Subtitle.TLabel", background=HEADER_COLOR, foreground="#D8D2FA", font=("Segoe UI", 10))
+        style.configure("Admin.TLabel", background=HEADER_COLOR, foreground="#77E6B6", font=("Segoe UI Semibold", 9))
+        style.configure("TButton", font=("Segoe UI Semibold", 10), padding=(18, 10))
+        style.configure("Primary.TButton", background="#2E12D1", foreground="#FFFFFF")
         style.map("Primary.TButton", background=[("active", "#2E12D1"), ("pressed", "#2410A6")])
         style.configure("Danger.TButton", background="#D64550", foreground="#FFFFFF")
         style.map("Danger.TButton", background=[("active", "#B93640")])
         style.configure("TNotebook", background="#F4F6FB", borderwidth=0)
-        style.configure("TNotebook.Tab", font=("Segoe UI Semibold", 10), padding=(18, 10))
+        style.configure("TNotebook.Tab", font=("Segoe UI Semibold", 12), padding=(30, 12))
         style.map("TNotebook.Tab", foreground=[("selected", "#3615FA")])
         style.configure("Treeview", font=("Segoe UI", 9), rowheight=28, background="#FFFFFF", fieldbackground="#FFFFFF")
         style.configure("Treeview.Heading", font=("Segoe UI Semibold", 9))
@@ -436,10 +437,10 @@ class AssistenteTI(tk.Tk):
         style.configure("TLabelframe.Label", background="#FFFFFF", foreground="#25106B", font=("Segoe UI Semibold", 10))
 
     def _build_header(self) -> None:
-        header = tk.Frame(self, bg="#25106B", height=92)
+        header = tk.Frame(self, bg=HEADER_COLOR, height=115)
         header.pack(fill="x")
         header.pack_propagate(False)
-        left = tk.Frame(header, bg="#25106B")
+        left = tk.Frame(header, bg=HEADER_COLOR)
         left.pack(side="left", padx=28, pady=16)
         ttk.Label(left, text=APP_NAME, style="Title.TLabel").pack(anchor="w")
         ttk.Label(
@@ -463,17 +464,19 @@ class AssistenteTI(tk.Tk):
 
     def _build_inventory_tab(self, parent: ttk.Frame) -> None:
         toolbar = ttk.Frame(parent)
-        toolbar.pack(fill="x", pady=(0, 10))
+        toolbar.pack(fill="x", padx=4, pady=(14, 20))
         ttk.Button(
             toolbar,
             text="Coletar informações",
             style="Primary.TButton",
             command=self._collect_inventory,
+            width= 20
         ).pack(side="left")
         self.export_button = ttk.Button(
-            toolbar, text="Salvar relatório", command=self._export_inventory, state="disabled"
+            toolbar, text="Salvar relatório", command=self._export_inventory, state="disabled",
+            width= 20
         )
-        self.export_button.pack(side="left", padx=8)
+        self.export_button.pack(side="left", padx=(16,0))
 
         card = ttk.Frame(parent, style="Card.TFrame", padding=14)
         card.pack(fill="both", expand=True)
